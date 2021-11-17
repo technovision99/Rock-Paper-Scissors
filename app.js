@@ -1,4 +1,6 @@
 let playerWinCount = 0, computerWinCount = 0;
+let count = 0;
+export const gameArray = [];
 function fixInput(playerSelection) {
     return playerSelection.toLowerCase();
 }
@@ -50,21 +52,31 @@ function playRound(playerSelection, computerSelection) {
         return ("Computer guessed " + computerSelection + " and you guessed " + playerGuess + " . It's a tie. Play again");
     }
 }
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = fixInput(prompt("Choose Rock, Paper, or Scissors!"));
-        let computerSelection = computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
+export function game(input) {
+    gameArray.pop();
+    let playerSelection = input;
+    console.log(playerSelection);
+    let computerSelection = computerPlay();
+    gameArray.push((playRound(playerSelection, computerSelection)));
+    console.log(gameArray);
+    count++;
+    if (count == 5) {
+        if (playerWinCount > computerWinCount) {
+            gameArray.push(("You won " + playerWinCount + " times and the computer won " + computerWinCount + " times. You win!"));
+        }
+        else if (computerWinCount > playerWinCount) {
+            gameArray.push(("You won " + playerWinCount + "  times and the computer won " + computerWinCount + " times. The computer wins!"));
+        }
+        else {
+            gameArray.push(("You won " + playerWinCount + " times and the computer won " + computerWinCount + "  times. It's a tie!"));
+        }
+        gameArray.push("Exit the page if you're done, or stay for more games. Your call.");
+        playerWinCount = 0;
+        computerWinCount = 0;
+        count = 0;
+
     }
-    if (playerWinCount > computerWinCount) {
-        console.log("You won " + playerWinCount + " times and the computer won " + computerWinCount + " times. You win!");
-    }
-    else if (computerWinCount > playerWinCount) {
-        console.log("You won " + playerWinCount + "  times and the computer won " + computerWinCount + " times. The computer wins!");
-    }
-    else {
-        console.log("You won " + playerWinCount + " times and the computer won " + computerWinCount + "  times. It's a tie!");
-    }
-    playerWinCount = 0;
-    computerWinCount = 0;
+    //typeWrite(".text-content",gameArray);
+
+
 }

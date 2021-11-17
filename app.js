@@ -53,7 +53,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 export function game(input) {
-    gameArray.pop();
+    gameArray = [];
     let playerSelection = input;
     console.log(playerSelection);
     let computerSelection = computerPlay();
